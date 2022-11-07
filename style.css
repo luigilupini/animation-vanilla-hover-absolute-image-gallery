@@ -1,0 +1,234 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+/* First start by ensuring our body is full screen vertical & horizontal */
+body {
+  font-family: "Rubik", sans-serif;
+  height: 100vh;
+  width: 100vw;
+  background: rgb(220, 218, 218);
+  overflow: hidden;
+  /* centering all content */
+  display: grid;
+  place-items: center;
+}
+
+/* I want to be the best wrapper 📦 :)
+To get everything centered ensure your wrapping element has equal measurement to
+its children elements, so it covers them with the same size/aspect ratio. We now
+keeping everything in proportion to the viewport. Additionally the centering has 
+just the parent wrapper called card-groups to position correctly on the page. */
+.card-groups,
+.card-group,
+.card {
+  aspect-ratio: 5 / 7;
+}
+.card-groups,
+.card-group,
+.big-card {
+  width: 30vmin;
+}
+.card-groups {
+  position: relative;
+}
+.card-group {
+  position: absolute;
+  transition: transform 400ms ease-in-out;
+}
+
+.card-group[data-status="unknown"] {
+  transform: scale(0);
+}
+.card-group[data-status="after"] {
+  transform: translateX(50%) scale(0);
+}
+.card-group[data-status="becoming-active-for-love"] {
+  transform: translateX(-50%) scale(0);
+  /* Start elements from here instantly with no transition */
+  transition: none;
+}
+.card-group[data-status="before"] {
+  transform: translateX(-50%) scale(0);
+}
+.card-group[data-status="becoming-active-for-hate"] {
+  transform: translateX(50%) scale(0);
+  /* Start elements from here instantly with no transition */
+  transition: none;
+}
+.card-group[data-status="active"] {
+  transition-delay: 350ms;
+}
+
+/* Using vmin or vmax: 
+https://css-tricks.com/simple-little-use-case-vmin/
+Both can change whilst the browser window is resized or the orientation of the
+mobile phone is changed. Example vmin is the minimum between a viewport height
+or width in percentage depending on which is smaller.
+
+vmin - is a percentage of viewport's smaller (vw or vh) dimension
+vmax - is a percentage of viewport's larger (vw or vh) dimension
+
+Viewport units are things like 10vw (10% of the viewport width) or 2vh (2% of
+the viewport height). Useful, as they are always relative to the viewport. No
+cascading or influence by parent elements. There is also `vmin`, which is the
+lesser of vw and vh, and vmax, which is the greater. These values can be used
+for anything that takes a length value, just like px, em or % or whatever. */
+.card {
+  aspect-ratio: 5 / 7;
+  background-color: rgba(255, 255, 255, 0.05);
+  position: absolute;
+  transition: transform 800ms cubic-bezier(0.05, 0.43, 0.25, 0.95);
+  /* Important properties for background images */
+  background-position: center;
+  background-size: cover;
+}
+.big-card {
+  width: 30vmin;
+  border-radius: 1vmin;
+  box-shadow: -1vmin 1vmin 1vmin rgba(48, 48, 48, 0.1);
+}
+.little-card {
+  width: 12vmin;
+  border-radius: 2vmin;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: -1vmin 1vmin 2vmin rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+}
+
+/* Transforming out-of-flow: 
+`:nth-child` takes a single argument that describes a pattern to match a element
+indices in a list of siblings. The `nth` of anything is n number of occurrences,
+this being that occurrence. In CSS its the counting number away from a parent.*/
+.big-card:nth-child(2) {
+  background-image: url("https://images.unsplash.com/photo-1641061657010-ad4d7796ce23?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60");
+  transform: translateX(-10%) rotate(-1deg);
+}
+.big-card:nth-child(4) {
+  background-image: url("https://images.unsplash.com/photo-1562946138-c2727afb47d1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60");
+  transform: rotate(2deg);
+}
+.big-card:nth-child(6) {
+  background-image: url("https://images.unsplash.com/photo-1666079731990-bcad20be9dfc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60");
+  transform: translateX(-6%) rotate(-3deg);
+}
+.big-card:nth-child(8) {
+  background-image: url("https://images.unsplash.com/photo-1650317114682-a579ec7b7c1c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NjF8fGxha2UlMjBjb21vfGVufDB8MXwwfHw%3D&auto=format&fit=crop&w=500&q=60");
+  transform: translate(10%, 3%) rotate(5deg);
+}
+.little-card:nth-child(7) {
+  background-image: url("https://images.unsplash.com/photo-1551655510-555dc3be8633?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60");
+}
+.little-card:nth-child(5) {
+  background-image: url("https://images.unsplash.com/photo-1608562099373-69dd6b715cd9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60");
+}
+.little-card:nth-child(3) {
+  background-image: url("https://images.unsplash.com/photo-1533735069-24d3be786431?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8bGFrZSUyMGNvbW98ZW58MHwxfDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60");
+}
+.little-card:nth-child(1) {
+  background-image: url("https://images.unsplash.com/photo-1534173751091-95c4b3108237?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60");
+}
+
+/* Below is for only your additional card-group being data-index="1" & "2" */
+.card-group[data-index="1"] > .big-card:nth-child(2) {
+  background-image: url("https://images.unsplash.com/photo-1647943963721-06487870b513?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTIyfHxpdGFseSUyMGRvbG9taXRlc3xlbnwwfDF8MHx8&auto=format&fit=crop&w=500&q=60");
+}
+.card-group[data-index="1"] > .big-card:nth-child(4) {
+  background-image: url("https://images.unsplash.com/photo-1549365318-d48c0437b760?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NzR8fGl0YWx5JTIwZG9sb21pdGVzfGVufDB8MXwwfHw%3D&auto=format&fit=crop&w=500&q=60");
+}
+.card-group[data-index="1"] > .big-card:nth-child(6) {
+  background-image: url("https://images.unsplash.com/photo-1559065188-2537766d864b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTZ8fGl0YWx5JTIwZG9sb21pdGVzfGVufDB8MXwwfHw%3D&auto=format&fit=crop&w=500&q=60");
+}
+.card-group[data-index="1"] > .big-card:nth-child(8) {
+  background-image: url("https://images.unsplash.com/photo-1664819089243-04a50cd3a667?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjF8fGl0YWx5JTIwZG9sb21pdGVzfGVufDB8MXwwfHw%3D&auto=format&fit=crop&w=500&q=60");
+}
+.card-group[data-index="1"] > .little-card:nth-child(7) {
+  background-image: url("https://images.unsplash.com/photo-1564841477299-7b7c8b65b5dc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8Y29ydGluYSUyMHRvd258ZW58MHwxfDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60");
+}
+.card-group[data-index="1"] > .little-card:nth-child(5) {
+  background-image: url("https://images.unsplash.com/photo-1561716514-daea32af173e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTd8fGl0YWx5JTIwY29ydGluYXxlbnwwfDF8MHx8&auto=format&fit=crop&w=500&q=60");
+}
+.card-group[data-index="1"] > .little-card:nth-child(3) {
+  background-image: url("https://images.unsplash.com/photo-1616074513769-fa42ee96fcc5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mzd8fGl0YWx5JTIwY29ydGluYXxlbnwwfDF8MHx8&auto=format&fit=crop&w=500&q=60");
+}
+.card-group[data-index="1"] > .little-card:nth-child(1) {
+  background-image: url("https://images.unsplash.com/photo-1519049069275-dea996e1a314?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGNvcnRpbmElMjBza2l8ZW58MHwxfDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60");
+}
+.card-group[data-index="2"] > .big-card:nth-child(2) {
+  background-image: url("https://images.unsplash.com/photo-1645718859183-073faa6f5b96?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8dmVuaWNlJTIwaXNsYW5kc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60");
+}
+.card-group[data-index="2"] > .big-card:nth-child(4) {
+  background-image: url("https://images.unsplash.com/photo-1566763306748-0f5632b4d111?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fGdvbmRvbGF8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60");
+}
+.card-group[data-index="2"] > .big-card:nth-child(6) {
+  background-image: url("https://images.unsplash.com/photo-1527169302081-dde275c2ace4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fHZlbmljZSUyMHBhc3RhfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60");
+}
+.card-group[data-index="2"] > .big-card:nth-child(8) {
+  background-image: url("https://images.unsplash.com/photo-1523906921802-b5d2d899e93b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8dmVuaWNlJTIwcGFzdGF8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60");
+}
+.card-group[data-index="2"] > .little-card:nth-child(7) {
+  background-image: url("https://images.unsplash.com/photo-1615230044142-17d6ce887dc0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80");
+}
+.card-group[data-index="2"] > .little-card:nth-child(5) {
+  background-image: url("https://images.unsplash.com/photo-1596654907146-e3f04b1561cc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8YnVyYW5vfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60");
+}
+.card-group[data-index="2"] > .little-card:nth-child(3) {
+  background-image: url("https://images.unsplash.com/photo-1569230516306-5a8cb5586399?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8aXRhbHklMjByZXN0YXVyYW50fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60");
+}
+.card-group[data-index="2"] > .little-card:nth-child(1) {
+  background-image: url("https://images.unsplash.com/photo-1553174859-5324403c8137?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80");
+}
+
+/* Hover effect in uniform arc */
+.card-group:hover > .big-card:nth-child(2) {
+  transform: translate(-75%, 16%) rotate(-24deg);
+}
+.card-group:hover > .big-card:nth-child(4) {
+  transform: translate(-25%, 8%) rotate(-8deg);
+}
+.card-group:hover > .big-card:nth-child(6) {
+  transform: translate(25%, 8%) rotate(8deg);
+}
+.card-group:hover > .big-card:nth-child(8) {
+  transform: translate(75%, 16%) rotate(20deg);
+}
+.card-group:hover > .little-card:nth-child(1) {
+  transform: translate(200%, -160%) rotate(-15deg);
+}
+.card-group:hover > .little-card:nth-child(3) {
+  transform: translate(160%, 150%) rotate(15deg);
+}
+.card-group:hover > .little-card:nth-child(5) {
+  transform: translate(-200%, -170%) rotate(15deg);
+}
+.card-group:hover > .little-card:nth-child(7) {
+  transform: translate(-280%, 140%) rotate(-15deg);
+}
+
+/* A wrapping card swipper container */
+.card-buttons {
+  margin-top: 8vmin;
+  display: flex;
+  justify-content: space-around;
+  padding: 0vmin 4vmin;
+}
+.card-buttons > button {
+  font-size: 2vmin;
+  border: 0.2vmin solid rgb(163, 163, 163);
+  border-radius: 100%;
+  color: rgb(149, 149, 149);
+  background-color: transparent;
+  height: 6vmin;
+  width: 6vmin;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+.card-buttons > button:hover {
+  color: rgba(97, 97, 97, 0.8);
+  background: rgba(97, 97, 97, 0.2);
+  border-color: rgba(97, 97, 97, 0.6);
+  box-shadow: 0vmin 0vmin 1vmin rgba(97, 97, 97, 0.1);
+}
